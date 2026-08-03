@@ -13,9 +13,17 @@ namespace ITEHA3_B33_Project_Tyger_Valley_Campus_EDUV4848998.Controllers
             _staffService = staffService;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(Guid? searchId)
         {
-            return View();
+            var allStaff = _staffService.GetAllStaffMembers();
+            ViewBag.SearchId = searchId;
+
+            if (searchId.HasValue)
+            {
+                ViewBag.SearchResult = _staffService.GetStaffById(searchId.Value);
+            }
+
+            return View(allStaff);
         }
 
       
