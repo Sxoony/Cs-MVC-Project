@@ -1,4 +1,5 @@
-﻿using ITEHA3_B33_Project_Tyger_Valley_Campus_EDUV4848998.Services;
+﻿using ITEHA3_B33_Project_Tyger_Valley_Campus_EDUV4848998.Models;
+using ITEHA3_B33_Project_Tyger_Valley_Campus_EDUV4848998.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ITEHA3_B33_Project_Tyger_Valley_Campus_EDUV4848998.Controllers
@@ -20,7 +21,7 @@ namespace ITEHA3_B33_Project_Tyger_Valley_Campus_EDUV4848998.Controllers
       
 
         [HttpGet]
-        public IActionResult Create()=> View();
+        public IActionResult Create()=> View(new StaffMember("", "", "", ""));
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(Models.StaffMember staffMember)
@@ -30,6 +31,7 @@ namespace ITEHA3_B33_Project_Tyger_Valley_Campus_EDUV4848998.Controllers
                 return View(staffMember);
             }
             _staffService.AddStaffMember(staffMember);
+            TempData["SuccessMessage"] = "Staff member created successfully.";
             return RedirectToAction("Index");
         }
         [HttpGet]

@@ -1,5 +1,24 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model IEnumerable<ITEHA3_B33_Project_Tyger_Valley_Campus_EDUV4848998.Models.StaffMember>
 @{
+    ViewData["Title"] = "Staff Management";
 }
+<div class="row mt-3">
+    <div class="col-md-3">
+        <div class="list-group">
+            <button class="list-group-item list-group-item-action " asp-action="" >List All Staff Members</button>
+            <button class="list-group-item list-group-item-action " >Fetch Staff Member By ID</button>
+            <button class="list-group-item list-group-item-action">Create/Add a Staff Member</button>
+            <button class="list-group-item list-group-item-action ">Update/Edit Staff Member Details</button>
+            <button class="list-group-item list-group-item-action ">Delete a Staff Member</button>
+            <label>Staff ID:</label>
+            <input type="text" class="form-control mb-2" id="staffIdInput" placeholder="Enter Staff ID">
+
+
+            <form asp-controller="Access" asp-action="Logout" method="post">
+                <button type="submit" class="list-group-item list-group-item-action text-danger w-100 text-start">Logout</button>
+            </form>
+        </div>
+    </div>
+
+
+</div>

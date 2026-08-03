@@ -33,7 +33,7 @@ namespace ITEHA3_B33_Project_Tyger_Valley_Campus_EDUV4848998
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Staff}/{action=Create}/{id?}");
 
             app.Run();
         }
