@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ITEHA3_B33_Project_Tyger_Valley_Campus_EDUV4848998.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : Controller    
     {
         private readonly ILogger<HomeController> _logger;
 
