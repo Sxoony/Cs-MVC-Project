@@ -13,20 +13,27 @@ namespace ITEHA3_B33_Project_Tyger_Valley_Campus_EDUV4848998.Controllers
             _staffService = staffService;
         }
 
-        public IActionResult Index(Guid? searchId)
+        public IActionResult Index(string searchId)
         {
             var allStaff = _staffService.GetAllStaffMembers();
             ViewBag.SearchId = searchId;
 
-            if (searchId.HasValue)
+            if (!string.IsNullOrWhiteSpace(searchId))
             {
-                ViewBag.SearchResult = _staffService.GetStaffById(searchId.Value);
+                if (Guid.TryParse(searchId, out var parsedId))
+                {
+                    ViewBag.SearchResult = _staffService.GetStaffById(parsedId);
+                }
+                else
+                {
+                    ViewBag.InvalidSearchId = true;
+                }
             }
 
             return View(allStaff);
         }
 
-      
+
 
         [HttpGet]
         public IActionResult Create()=> View(new StaffMember("", "", "", ""));
@@ -43,10 +50,20 @@ namespace ITEHA3_B33_Project_Tyger_Valley_Campus_EDUV4848998.Controllers
             return RedirectToAction("Index");
         }
         [HttpGet]
-        public IActionResult Edit(Guid id)
+        public IActionResult Edit(string id)
         {
-            var staff = _staffService.GetStaffById(id);
-            if (staff==null)  return NotFound();
+            if (!Guid.TryParse(id, out var staffId))
+            {
+                TempData["SearchError"] = "Invalid Staff ID format.";
+                return RedirectToAction("Index");
+            }
+
+            var staff = _staffService.GetStaffById(staffId);
+            if (staff == null)
+            {
+                TempData["SearchError"] = $"No staff member found with ID: {id}";
+                return RedirectToAction("Index");
+            }
             return View(staff);
         }
         [HttpPost]
@@ -64,16 +81,16 @@ namespace ITEHA3_B33_Project_Tyger_Valley_Campus_EDUV4848998.Controllers
         }
 
         [HttpGet]
-        public IActionResult Delete(Guid id)
+        public IActionResult Delete(string id)
         {
-            if (_staffService.DeleteStaffMember(id))
+            if (!Guid.TryParse(id, out var staffId) || !_staffService.DeleteStaffMember(staffId))
             {
+                TempData["SearchError"] = "Invalid Staff ID, or no matching staff member was found.";
                 return RedirectToAction("Index");
             }
-            else
-            {
-                return NotFound();
-            }
+
+            TempData["SuccessMessage"] = "Staff member deleted successfully.";
+            return RedirectToAction("Index");
         }
     }
 }
