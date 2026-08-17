@@ -11,8 +11,11 @@ namespace ITEHA3_B33_Project_Tyger_Valley_Campus_EDUV4848998
             builder.Services.AddControllersWithViews();
             builder.Services.AddDistributedMemoryCache();
             builder.Services.AddSession();
+
+
             builder.Services.AddSingleton<Services.StaffService>();
             builder.Services.AddSingleton<Services.AdminService>();
+
 
             var app = builder.Build();
 
@@ -33,7 +36,7 @@ namespace ITEHA3_B33_Project_Tyger_Valley_Campus_EDUV4848998
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Staff}/{action=Create}/{id?}");
+                pattern: "{controller=Access}/{action=Login}/{id?}");
 
             app.Run();
         }

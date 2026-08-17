@@ -43,7 +43,7 @@ namespace ITEHA3_B33_Project_Tyger_Valley_Campus_EDUV4848998.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(staffMember);
+                return View(staffMember); // Return the view with validation errors
             }
             _staffService.AddStaffMember(staffMember);
             TempData["SuccessMessage"] = "Staff member created successfully.";
@@ -81,7 +81,7 @@ namespace ITEHA3_B33_Project_Tyger_Valley_Campus_EDUV4848998.Controllers
         }
 
         [HttpGet]
-        public IActionResult Delete(string id)
+        public IActionResult Delete(string id) //delete is a get request because it is a confirmation page, not the actual deletion action.
         {
             if (!Guid.TryParse(id, out var staffId) || !_staffService.DeleteStaffMember(staffId))
             {

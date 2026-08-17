@@ -25,7 +25,6 @@ namespace ITEHA3_B33_Project_Tyger_Valley_Campus_EDUV4848998.Controllers
             if (!string.IsNullOrEmpty(HttpContext.Session.GetString("AdminUsername")))
                 return RedirectToAction("Index", "Staff");
 
-
             return View();
         }
 
@@ -35,8 +34,8 @@ namespace ITEHA3_B33_Project_Tyger_Valley_Campus_EDUV4848998.Controllers
         {
             if (_adminService.ValidateCredentials(username, password))
             {
-                HttpContext.Session.SetString("AdminUsername", username);
-                return RedirectToAction("Index", "Staff");
+                HttpContext.Session.SetString("AdminUsername", username); 
+                return RedirectToAction("Index", "Staff"); 
             }
 
             TempData["AccessError"] = "Invalid username or password.";
