@@ -15,6 +15,15 @@
     <div class="alert alert-success">@TempData["SuccessMessage"]</div>
 }
 
+
+
+@* // =========== DELIVERABLE 3 =========== *@
+
+
+
+
+
+
 <div class="row mt-3">
     <div class="col-md-3">
         <div class="list-group">
@@ -32,7 +41,7 @@
             </form>
         </div>
     </div>
-
+    @* Section on right hand side of the screen to display responses.*@
     <div class="col-md-9">
         @if (ViewBag.SearchId != null)
         {
@@ -88,7 +97,7 @@
         }
     </div>
 </div>
-
+@*Simple JS validation, project will not grow, so inline script for this view is fine.*@
 @section Scripts {
     <script>
         function getStaffId() {

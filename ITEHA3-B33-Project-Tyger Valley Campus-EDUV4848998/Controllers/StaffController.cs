@@ -6,7 +6,12 @@ namespace ITEHA3_B33_Project_Tyger_Valley_Campus_EDUV4848998.Controllers
 {
     public class StaffController : AdminControllerBase 
     {
-        
+
+        // =========== DELIVERABLE 3 ===========
+
+
+
+
         private readonly StaffService _staffService;
         public StaffController(StaffService staffService)
         {
@@ -16,7 +21,7 @@ namespace ITEHA3_B33_Project_Tyger_Valley_Campus_EDUV4848998.Controllers
         public IActionResult Index(string searchId)
         {
             var allStaff = _staffService.GetAllStaffMembers();
-            ViewBag.SearchId = searchId;
+            ViewBag.SearchId = searchId; //only lives in current request, so we can use it to pre-fill the search box in the view.
 
             if (!string.IsNullOrWhiteSpace(searchId))
             {
@@ -36,12 +41,12 @@ namespace ITEHA3_B33_Project_Tyger_Valley_Campus_EDUV4848998.Controllers
 
 
         [HttpGet]
-        public IActionResult Create()=> View(new StaffMember("", "", "", ""));
+        public IActionResult Create()=> View(new StaffMember("", "", "", "")); //if no staff member is passed, we create a new one with empty fields to avoid null reference exceptions in the view.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(Models.StaffMember staffMember)
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid) //if the data from the model binding (according to validation rules) is not valid, we return the view with the current staff member to show validation errors.
             {
                 return View(staffMember); // Return the view with validation errors
             }
@@ -50,7 +55,10 @@ namespace ITEHA3_B33_Project_Tyger_Valley_Campus_EDUV4848998.Controllers
             return RedirectToAction("Index");
         }
         [HttpGet]
-        public IActionResult Edit(string id)
+        public IActionResult Edit(string id) //edit can be renamed to anything, the view that references it will still work,
+                                             //but it is a good practice to name the action method after the view it returns.
+                                             //URLs map automatically to the action method name, so if you change the name of the action method, you will have to change the URL in the view as well.
+                                             //This means the asp-action references must match.
         {
             if (!Guid.TryParse(id, out var staffId))
             {

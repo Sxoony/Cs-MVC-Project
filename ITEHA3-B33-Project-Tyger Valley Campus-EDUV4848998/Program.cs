@@ -13,8 +13,8 @@ namespace ITEHA3_B33_Project_Tyger_Valley_Campus_EDUV4848998
             builder.Services.AddSession();
 
 
-            builder.Services.AddSingleton<Services.StaffService>();
-            builder.Services.AddSingleton<Services.AdminService>();
+            builder.Services.AddSingleton<Services.IStaffService, Services.StaffService>();
+            builder.Services.AddSingleton<Services.IAdminService, Services.AdminService>();
 
 
             var app = builder.Build();

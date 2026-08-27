@@ -2,11 +2,11 @@
 
 namespace ITEHA3_B33_Project_Tyger_Valley_Campus_EDUV4848998.Services
 {
-    public class AdminService
+    public class AdminService : IAdminService
     {
         private readonly List<SystemAdmin> _admins = new()
         {
-            new SystemAdmin("admin", "Admin123")
+            new SystemAdmin("admin", "Admin123") //no added functionality to add admin. Simple one profile for the purpose of the project.
         };
         public bool ValidateCredentials(string username, string password)
         {
